@@ -10,13 +10,6 @@ function shrinkPaginator() {
 }
 
 function main() {
-    // var $misc = $('.news-preview-misc');
-    // $misc.each(function(){
-    // 	$targetHeight = $(this).prev().height();
-    // 	$(this).height($targetHeight);
-    // });
-
-
 // *** News images appearing on viewport entry ***
 // 	pass each news image container to the "in viewport checker" to get its position
     var $newsImageBox = $('.post-image-container');
@@ -34,7 +27,6 @@ function main() {
             }
         });
     });
-
 
 // *** SCROLLTOP ***
 
@@ -58,6 +50,22 @@ function main() {
 
 // *** Paginator ***
     shrinkPaginator();
+
+
+    // *** ConfirmDelete MODAL ***
+    $('#confirmDelete').on('shown.bs.modal', function (e) {
+        // fix the bug with modal backdrop and scrolling
+        $(this).css('overflow', 'hidden');
+        $('.modal-backdrop.fade').removeClass('show').addClass('in');
+
+        var $button = $(e.relatedTarget);
+        $('#deletePost')[0].action = '/news/' + $button.data('post-id');
+        $('#delete-title').text($button.data('post-title'));
+    });
+
+    $('#confirmDelete').on('hidden.bs.modal', function () {
+        $('#delete-title').text('');
+    });
 
 // *** PUSH FOOTER TO THE BOTTOM OF THE PAGE IF THE CONTENT IS NOT HIGH ENOUGH ***
     var docHeight = $(window).height();

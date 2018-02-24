@@ -8,6 +8,11 @@
 
 @section('subheading')
     <div class="subheading row justify-content-between">
+        @auth
+        <div class="col-sm-6 col-md-8">
+            <a href="/news/create" class="btn btn-success">Create new post</a>
+        </div>
+        @endauth
         <div class="searchbox col-sm-4">
             <form class="input-group" method="GET" action="/search">
                 <input name="q" type="text" class="form-control" placeholder="Search the news">

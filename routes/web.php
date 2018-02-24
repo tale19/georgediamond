@@ -20,7 +20,12 @@ Route::get('/shows', 'PagesController@shows');
 Route::get('/contact', 'PagesController@contact');
 
 Route::get('/news', 'PostsController@index');
+Route::post('/news', 'PostsController@store');
+Route::get('/news/create', 'PostsController@create');
 Route::get('/news/{post}', 'PostsController@show');
+Route::patch('/news/{post}', 'PostsController@update');
+Route::delete('/news/{post}', 'PostsController@destroy');
+Route::get('/news/{post}/edit', 'PostsController@edit');
 Route::get('/search', 'PostsController@search');
 
 Route::get('/shows', 'ShowsController@index');

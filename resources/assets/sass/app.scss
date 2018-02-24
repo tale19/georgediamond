@@ -38,13 +38,13 @@ body {
 
 .page-headline,
 .post-headline {
-  text-align: center;
   color: #337AB7;
 }
 
 .page-headline {
   margin: 30px auto 30px;
   font-family: 'Passion One', cursive;
+  text-align: center;
   @media(min-width: 768px) {
     font-size: 4em
   }
@@ -1097,7 +1097,11 @@ nav.navbar {
       margin-top: -5px;
       font-size: 1.25em;
     }
-
+    .btn {
+      @media (max-width: 575px) {
+        margin-bottom: 10px;
+      }
+    }
     .searchbox {
       margin-left: auto;
       @media (min-width: 576px) and (max-width: 767px) {
@@ -1122,6 +1126,8 @@ nav.navbar {
         margin-top: unset;
         font-size: 2em;
         font-family: 'Patua One', cursive;
+        -ms-text-align-last: left;
+        text-align-last: left;
         @media(min-width: 1200px) {
           font-size: 2.5em
         }
@@ -1130,8 +1136,7 @@ nav.navbar {
         text-align: justify;
         .post-date {
           margin: 10px auto 5px;
-          -ms-text-align-last: right;
-          text-align-last: right;
+          text-align: right;
           font-style: italic;
         }
       }
@@ -1206,6 +1211,16 @@ nav.navbar {
       a:hover {
         color: #fff;
       }
+    }
+  }
+  .modal-dialog {
+    margin-top: 120px;
+    .modal-title {
+      font-size: 1.5em;
+      font-weight: 600;
+    }
+    .modal-body > div {
+      font-size: 1.2em;
     }
   }
 }

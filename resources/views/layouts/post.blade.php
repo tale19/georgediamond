@@ -5,10 +5,13 @@
     <div id="news-content">
 
         <div class="container">
-
             @yield('pageHeadline')
 
             @yield('subheading')
+        </div>
+
+
+        <div class="container">
 
             @yield('post-box')
 
@@ -16,7 +19,7 @@
 
             @if (substr(request()->path(), 0, 4) == 'news' ||
             (request()->path() == 'search' && $searchResults->total() > 5)) {{-- 5 results per page (paginate) --}}
-                <hr>
+            <hr>
             @endif
 
             @yield('buttons')
@@ -24,6 +27,8 @@
             @yield('pagination')
 
         </div> <!-- container -->
+
+        @include('partials.confirm-delete')
 
     </div> <!-- #news-content -->
 
