@@ -26,6 +26,7 @@ class StorePost extends FormRequest
         return [
             'title' => 'required|max:128',
             'body' => 'required',
+            'image' => 'mimes:jpeg,png,gif|max:999',
         ];
     }
 
@@ -33,8 +34,10 @@ class StorePost extends FormRequest
     {
         return [
             'title.required' => 'Post title is required',
-            'title.max' => 'The maximum title length is 128 characters',
+            'title.max' => 'Maximum title length is 128 characters',
             'body.required' => 'Post body is required',
+            'image.mimes' => 'Please upload only images in JPEG, PNG or GIF format',
+            'image.max' => 'Maximum image size is 1MB',
         ];
     }
 }

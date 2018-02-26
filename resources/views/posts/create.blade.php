@@ -24,32 +24,38 @@
 
 @section('post-box')
 
-    <section class="post-box row">
+    <form method="POST" action="/news" enctype="multipart/form-data">
+        {{ csrf_field() }}
 
-        <article class="col-sm-6 col-md-7 order-sm-12 article">
-            <form method="POST" action="/news">
-                {{ csrf_field() }}
+        <section class="post-box row">
+
+            <article class="col-sm-6 col-md-7 order-sm-12 article">
                 <div class="form-group">
                     <label for="post-title">Title</label>
-                    <input name="title" id="post-title" type="text" value="{{ old('title') }}" class="form-control"/>
+                    <input type="text" name="title" id="post-title" class="form-control" value="{{ old('title') }}"/>
                 </div>
                 <div class="form-group">
                     <label for="post-body">Body</label>
-                    <textarea name="body" id="post-body" rows="10" class="form-control">{{ old('body') }}</textarea>
+                    <textarea name="body" id="post-body" class="form-control" rows="10">{{ old('body') }}</textarea>
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Publish post</button>
                 </div>
-            </form>
-            @include('partials.errors')
-        </article> <!-- news-article -->
+                @include('partials.errors')
+            </article> <!-- news-article -->
 
-        <div class="col-sm-6 col-md-5 post-misc">
-            <div class="post-image-container">
-                <span>Insert image</span>
-            </div>  <!-- .post-image-container -->
-        </div>  <!-- .post-misc -->
+            <div class="col-sm-6 col-md-5 post-misc">
+                <div class="post-image-container">
+                    <div class="form-group">
+                        <label for="post-image">Upload post image</label>
+                        <input type="file" name="image" id="post-image" class="form-control-file"/>
+                        <p>Supported formats are JPEG, PNG and GIF. Max filesize is 2MB.</p>
+                    </div>
+                </div>  <!-- .post-image-container -->
+            </div>  <!-- .post-misc -->
 
-    </section> <!-- .post-box.row -->
+        </section> <!-- .post-box.row -->
+
+    </form>
 
 @endsection

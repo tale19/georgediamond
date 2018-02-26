@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use App\Http\Requests\StorePost;
-use Illuminate\Support\Facades\Auth;
-use Mews\Purifier\Facades\Purifier;
+use Auth;
+use Illuminate\Support\Facades\Storage;
+use Purifier;
+use Image;
 
 class PostsController extends Controller
 {
@@ -36,6 +38,17 @@ class PostsController extends Controller
         $post->body    = Purifier::clean($request->input('body'));
         $post->user_id = Auth::user()->id;
 
+        if ($request->hasFile('image')) {
+            $image    = $request->file('image');
+            $filename = time().'.'.$image->getClientOriginalExtension();
+            $location = storage_path('app/public/images/news/'.$filename);
+            Image::make($image)->resize(800, null, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            })->save($location);
+            $post->imgname = $filename;
+        }
+
         $post->save();
 
         return redirect('/news');
@@ -65,6 +78,18 @@ class PostsController extends Controller
         $post->title = $request->input('title');
         $post->body  = Purifier::clean($request->input('body'));
 
+        if ($request->hasFile('image')) {
+            $image    = $request->file('image');
+            $filename = time().'.'.$image->getClientOriginalExtension();
+            $location = storage_path('app/public/images/news/'.$filename);
+            Image::make($image)->resize(800, null, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            })->save($location);
+            Storage::delete('public/images/news/'.$post->imgname);
+            $post->imgname = $filename;
+        }
+
         $post->save();
 
         return redirect('/news/'.$post->id);
@@ -74,6 +99,7 @@ class PostsController extends Controller
     {
         $postid = $post->id;
 
+        Storage::delete('public/images/news/'.$post->imgname);
         $post->delete();
 
         if (url()->previous() == env('APP_URL').'/news/'.$postid) {

@@ -23,12 +23,14 @@
 
 @section('post-box')
 
-    <section class="post-box row">
+    <form method="POST" action="/news/{{ $post->id }}" enctype="multipart/form-data">
+        {{ method_field('PATCH') }}
+        {{ csrf_field() }}
 
-        <article class="col-sm-6 col-md-7 order-sm-12 article">
-            <form method="POST" action="/news/{{ $post->id }}">
-                {{ method_field('PATCH') }}
-                {{ csrf_field() }}
+        <section class="post-box row">
+
+            <article class="col-sm-6 col-md-7 order-sm-12 article">
+
                 <div class="form-group">
                     <label for="post-title">Title</label>
                     <input name="title" id="post-title" type="text" value="{{ $post->title }}" class="form-control"/>
@@ -41,16 +43,22 @@
                     <button type="submit" class="btn btn-success">Update post</button>
                     <a href="/news/{{ $post->id }}" class="btn btn-danger">Cancel</a>
                 </div>
-            </form>
-            @include('partials.errors')
-        </article> <!-- news-article -->
+                @include('partials.errors')
+            </article> <!-- news-article -->
 
-        <div class="col-sm-6 col-md-5 post-misc">
-            <div class="post-image-container">
-                <span>Edit image</span>
-            </div>  <!-- .post-image-container -->
-        </div>  <!-- .post-misc -->
+            <div class="col-sm-6 col-md-5 post-misc">
+                <div class="post-image-container">
+                    <img src="/storage/images/news/{{ $post->imgname }}" alt="">
+                    <div class="form-group">
+                        <label for="post-image">Upload new image</label>
+                        <input type="file" name="image" id="post-image" class="form-control-file"/>
+                        <p>Supported formats are JPEG, PNG and GIF. Max filesize is 2MB.</p>
+                    </div>
+                </div>  <!-- .post-image-container -->
+            </div>  <!-- .post-misc -->
 
-    </section> <!-- .post-box.row -->
+        </section> <!-- .post-box.row -->
+
+    </form>
 
 @endsection
