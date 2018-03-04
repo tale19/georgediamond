@@ -12,7 +12,9 @@
 */
 
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/admin', 'HomeController@index')->name('admin.index');
+Route::get('/admin/shows', 'HomeController@shows')->name('admin.shows');
+Route::get('/admin/news', 'HomeController@posts')->name('admin.posts');
 
 Route::get('/', 'PagesController@index');
 Route::get('/about', 'PagesController@about');

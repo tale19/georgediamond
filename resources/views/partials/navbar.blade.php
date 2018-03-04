@@ -39,15 +39,15 @@
 
                     <ul class="dropdown-menu dropdown-menu-right">
                         <li class="nav-item">
-                            <a href="/home" class="nav-link">
-                                Admin panel
+                            <a href="/admin" class="nav-link">
+                                <span style="font-size: 0.75em;"><i class="fas fa-cog"></i></span>&nbsp;Admin panel
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('logout') }}" class="nav-link"
                                onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();" style="color:#ef0f00">
-                                Logout
+                                <span style="font-size: 0.75em;"><i class="fas fa-power-off"></i></span>&nbsp;Sign out
                             </a>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST"
